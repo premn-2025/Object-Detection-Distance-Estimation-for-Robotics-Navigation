@@ -90,8 +90,8 @@ dominated by small distant instances, which the robustness section quantifies.
 
 ### Distance estimation — reported as *consistency*, not accuracy
 
-**None of these datasets contains ground-truth distance.** I did not manufacture
-an accuracy number. The estimator is validated two ways instead:
+**None of these datasets contains ground-truth distance**, so no distance
+accuracy figure is reported. The estimator is validated two ways instead:
 
 | validation | result |
 |---|---|
@@ -100,8 +100,8 @@ an accuracy number. The estimator is validated two ways instead:
 | Cue agreement, **barriers — never used in the fit** | 1.401× → **0.998×** |
 
 Fitted camera: **height 1.38 m, pitch −0.53°**. Proper accuracy validation needs
-a depth-equipped dataset (KITTI, nuScenes) or calibrated measurements; that is
-stated as future work, not glossed over.
+a depth-equipped dataset (KITTI, nuScenes) or calibrated measurements, which is
+listed as future work.
 
 ### Robustness and small objects
 
@@ -128,7 +128,7 @@ matters for navigation:
 | motion blur | 92.1 % / 62.4 % |
 | **fog** | **53.2 % / 47.4 %** |
 
-Fog is the clear weakness, and honestly so: the evaluation fog is depth-correct
+Fog is the clear weakness: the evaluation fog is depth-correct
 and erases the far field, which is exactly where the hard objects live.
 
 ### Edge optimisation
@@ -152,9 +152,9 @@ YOLO11n 140.6 (0.93×).
 
 ---
 
-## Three things worth a reviewer's attention
+## Key findings
 
-### 1. The split was audited for leakage before any metric was reported
+### 1. Dataset leakage: found, quantified, fixed
 
 ROADWork frames are video frames; two frames 30 ms apart are the same picture.
 Splitting at frame level makes validation measure memorisation — *silently*,
@@ -181,7 +181,7 @@ so a train chunk never sits beside a val chunk.
 Caught before stage-2 training, so no compute was wasted, and every number above
 is measured on a genuinely held-out split.
 
-### 2. Distance comes from geometry, as the brief asks
+### 2. Distance is computed from geometry, not learned
 
 No neural network estimates distance anywhere in this project. Two independent
 cues, fused by inverse variance in log space, with **analytic** Jacobians:
@@ -204,9 +204,9 @@ different cameras**; small boxes bias the height estimate upward
 is documented with its fix in
 [`docs/distance_estimation.md`](docs/distance_estimation.md).
 
-### 3. Optimisation results are measured, not assumed — including three negatives
+### 3. Optimisation measured empirically, including three negative results
 
-A table of only wins would be a table built to look good. Four findings:
+Four findings, three of them negative:
 
 1. **INT8 dynamic quantisation is 13× *slower*** (2.0 vs 26.0 FPS). The obvious
    "just quantise it" move is the worst row in the table — per-op runtime
@@ -318,8 +318,8 @@ be confounded with a change of backbone.
 warm-up, where both runs share an identical LR trajectory — the BDD100K-
 initialised run leads by **+0.103, +0.049, +0.051** mAP50-95. Past warm-up the
 8-epoch ablation's cosine schedule anneals faster than the 25-epoch run's, so
-later epochs are not comparable; a matched 25-epoch ablation is the right next
-experiment and was not affordable here. Stated rather than glossed.
+later epochs are not comparable. A matched 25-epoch ablation is the right next
+experiment; it was not affordable within the compute budget here.
 
 ### Hard conditions and evaluation integrity
 
@@ -340,8 +340,8 @@ Evaluation corruptions are implemented **independently** of the training
 augmentation ([`src/data/degrade.py`](src/data/degrade.py)), so the benchmark
 measures robustness rather than memorisation of one library's noise generator.
 
-**A profiling find worth recording:** mid-training the GPU sat at **0–1 %
-utilisation** while the CPU saturated. One transform was responsible —
+**A profiling result:** mid-training the GPU sat at **0–1 % utilisation** while
+the CPU saturated. One transform was responsible —
 `A.RandomFog` at **1809 ms/image**, against 1–50 ms for everything else.
 Replacing it with a physical haze model took the stack from **230 ms → 23 ms per
 image, a 10× training speed-up**.
@@ -359,8 +359,9 @@ image, a 10× training speed-up**.
 
 Structured pruning is implemented but did not complete: `torch-pruning`'s
 dependency-graph build does not converge on YOLO11s (> 200 s on CPU *and* GPU,
-while a forward pass takes 0.2 s), likely its C2PSA attention blocks. Reported as
-a tooling limitation rather than dressed up.
+while a forward pass takes 0.2 s), likely its C2PSA attention blocks. This is a
+tooling limitation in torch-pruning's YOLO11 support, not a missing
+implementation.
 
 ### Extra credit — all three implemented
 
@@ -378,7 +379,7 @@ recovered translation `[-0.009, 0.006, -1.000]` — almost perfectly forward, th
 correct answer for a dash-cam. The scale-anchored cross-check returned nothing,
 for the reason the doc predicts: under pure forward motion the epipole sits at
 the image centre, exactly where the cones are, so their triangulation is
-ill-conditioned. A predicted failure is still a result.
+ill-conditioned — the failure mode the derivation predicts.
 
 **Homography / BEV** — [`src/geometry/bev.py`](src/geometry/bev.py) builds the IPM
 homography directly from the camera model (`H = K·[r₁|r₃|h·r₂]`), so the canvas
