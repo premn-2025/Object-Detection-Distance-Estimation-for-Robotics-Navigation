@@ -1,11 +1,13 @@
 # --- data ---------------------------------------------------------------
 # Raw archives and derived datasets are large and reproducible:
 #   python scripts/download_data.py --all && python scripts/prepare_data.py --all
-data/
-!data/.gitkeep
+# Leading slash matters: a bare `data/` also matches src/data/, which silently
+# excluded the entire dataset layer of the package.
+/data/
+!/data/.gitkeep
 
 # --- training / experiment artefacts ------------------------------------
-runs/
+/runs/
 *.pt
 !yolo11n.pt.placeholder
 *.onnx

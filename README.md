@@ -226,6 +226,12 @@ A table of only wins would be a table built to look good. Four findings:
 
 ## Quick start
 
+**Pretrained weights.** The final YOLO11s checkpoint is published as a **GitHub
+release asset**, not committed to Git. Model weights, datasets and training runs
+are deliberately excluded from history (`.gitignore`) to keep the repository
+clone-able; everything needed to regenerate them is below. To run inference
+without retraining, download `best.pt` from Releases and pass it to `--weights`.
+
 ```bash
 pip install -r requirements.txt
 
