@@ -1,0 +1,24 @@
+# Normalise line endings in the repository to LF regardless of the OS a
+# contributor is on. Without this, committing from Windows stores CRLF and a
+# Linux reviewer's clone gets Windows line endings in every source file - which
+# also breaks `#!/usr/bin/env` shebangs on shell scripts.
+* text=auto eol=lf
+
+*.py    text eol=lf
+*.md    text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+*.sh    text eol=lf
+*.cfg   text eol=lf
+
+# Never touch binaries: line-ending conversion corrupts them.
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.mp4   binary
+*.pt    binary
+*.pth   binary
+*.onnx  binary
+*.zip   binary
