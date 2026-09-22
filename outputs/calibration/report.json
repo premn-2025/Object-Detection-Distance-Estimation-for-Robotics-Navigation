@@ -1,0 +1,122 @@
+{
+  "fitted": {
+    "camera_height_m": 1.3776618993726886,
+    "pitch_deg": -0.533743477147069
+  },
+  "free_parameters": [
+    "pitch_deg"
+  ],
+  "height_source": "fixed from height_sensitivity (degenerate with pitch)",
+  "seed": {
+    "camera_height_m": 1.3776618993726886,
+    "pitch_deg": 0.0
+  },
+  "objective": 0.023515471745349837,
+  "train_before": {
+    "n": 885,
+    "median_abs_log_ratio": 0.17612980299663072,
+    "median_ratio": 1.0269400532640311,
+    "p90_abs_log_ratio": 0.3626164258908836
+  },
+  "train_after": {
+    "n": 885,
+    "median_abs_log_ratio": 0.17614156647925738,
+    "median_ratio": 1.0269645853517666,
+    "p90_abs_log_ratio": 0.36259191339326763
+  },
+  "val_before": {
+    "n": 321,
+    "median_abs_log_ratio": 0.18659635618145387,
+    "median_ratio": 1.0102242846953464,
+    "p90_abs_log_ratio": 0.3614428074654972
+  },
+  "val_after": {
+    "n": 321,
+    "median_abs_log_ratio": 0.18662103610009773,
+    "median_ratio": 1.0102484992060488,
+    "p90_abs_log_ratio": 0.3614186020702179
+  },
+  "note": "fy is not identifiable from cue agreement (it cancels in the ratio); it stays at its FOV-derived value",
+  "height_sensitivity": [
+    {
+      "min_box_px": 0,
+      "min_base_row_frac": 0.0,
+      "n": 14846,
+      "implied_height_m_median": 2.4250499354794766,
+      "iqr": [
+        1.7404651196613607,
+        3.470918184210407
+      ]
+    },
+    {
+      "min_box_px": 40,
+      "min_base_row_frac": 0.0,
+      "n": 6540,
+      "implied_height_m_median": 1.7923177772429726,
+      "iqr": [
+        1.4142407945626545,
+        2.2214801291346165
+      ]
+    },
+    {
+      "min_box_px": 60,
+      "min_base_row_frac": 0.62,
+      "n": 3474,
+      "implied_height_m_median": 1.5822550856108524,
+      "iqr": [
+        1.3087762194088888,
+        1.9196344908699743
+      ]
+    },
+    {
+      "min_box_px": 80,
+      "min_base_row_frac": 0.76,
+      "n": 1387,
+      "implied_height_m_median": 1.575568574746539,
+      "iqr": [
+        1.3019444667484352,
+        1.8465483091267423
+      ]
+    },
+    {
+      "min_box_px": 120,
+      "min_base_row_frac": 0.83,
+      "n": 454,
+      "implied_height_m_median": 1.3776618993726886,
+      "iqr": [
+        1.1485517001144123,
+        1.606279920093033
+      ]
+    },
+    {
+      "min_box_px": 160,
+      "min_base_row_frac": 0.86,
+      "n": 161,
+      "implied_height_m_median": 1.1452949199091516,
+      "iqr": [
+        1.0259594457085517,
+        1.2592043516300937
+      ]
+    }
+  ],
+  "conditioning_gate": {
+    "min_box_px": 100.0,
+    "min_base_row_frac": 0.78
+  },
+  "held_out_class": {
+    "class": "barrier",
+    "before": {
+      "n": 192,
+      "median_ratio": 0.998174656902278,
+      "median_abs_log_ratio": 0.11836446398101763,
+      "p90_abs_log_ratio": 0.37978638662750647
+    },
+    "after": {
+      "n": 192,
+      "median_ratio": 0.9981981545226024,
+      "median_abs_log_ratio": 0.11838880248018613,
+      "p90_abs_log_ratio": 0.3797628525473417
+    },
+    "note": "this class never enters the fit, so its agreement ratio is the only non-circular check available"
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "weights": "runs/stage2/nav_yolo11s-3/weights/best.pt",
+  "split": "val",
+  "n_images": 400,
+  "imgsz": 640,
+  "gt_size_histogram": {
+    "overall": {
+      "small (<32^2 px)": 1474,
+      "medium (32-96^2 px)": 824,
+      "large (>96^2 px)": 268
+    },
+    "per_class": {
+      "cone": {
+        "small (<32^2 px)": 833,
+        "medium (32-96^2 px)": 366,
+        "large (>96^2 px)": 12
+      },
+      "barrier": {
+        "small (<32^2 px)": 608,
+        "medium (32-96^2 px)": 399,
+        "large (>96^2 px)": 228
+      },
+      "stop_sign": {
+        "small (<32^2 px)": 33,
+        "medium (32-96^2 px)": 59,
+        "large (>96^2 px)": 28
+      }
+    }
+  },
+  "clean": {
+    "mAP50-95": 0.4133760739613751,
+    "mAP50": 0.6297143018145593,
+    "mAP75": 0.44466979214912206,
+    "AP_small": 0.22253475917778093,
+    "AP_medium": 0.5643165065382096,
+    "AP_large": 0.7011944706050042,
+    "AR_100": 0.5000325040034501,
+    "n_detections": 23801,
+    "n_gt_boxes": 2566,
+    "per_class": {
+      "cone": {
+        "mAP50-95": 0.3236885239803262,
+        "mAP50": 0.5501177952491549,
+        "AP_small": 0.1710551637018461,
+        "n_gt": 1211
+      },
+      "barrier": {
+        "mAP50-95": 0.28820640690782334,
+        "mAP50": 0.5466852994488886,
+        "AP_small": 0.14563141864513307,
+        "n_gt": 1235
+      },
+      "stop_sign": {
+        "mAP50-95": 0.6282332909959757,
+        "mAP50": 0.7923398107456344,
+        "AP_small": 0.3509176951863637,
+        "n_gt": 120
+      }
+    }
+  },
+  "corruptions": [
+    {
+      "corruption": "defocus",
+      "severity": 2,
+      "description": "focus hunting, dirty or wet lens",
+      "mAP50-95": 0.4069483886566641,
+      "mAP50": 0.6101174602003477,
+      "AP_small": 0.20851000242476586,
+      "AP_large": 0.6975009816522252,
+      "retained": 0.9844507563219259
+    },
+    {
+      "corruption": "defocus",
+      "severity": 4,
+      "description": "focus hunting, dirty or wet lens",
+      "mAP50-95": 0.3339908332516935,
+      "mAP50": 0.5342654846963674,
+      "AP_small": 0.11469914832279775,
+      "AP_large": 0.665682301488638,
+      "retained": 0.8079587917391194
+    },
+    {
+      "corruption": "downscale",
+      "severity": 2,
+      "description": "resolution loss / distant small objects",
+      "mAP50-95": 0.41386005972787354,
+      "mAP50": 0.6251719323130266,
+      "AP_small": 0.22745944733748494,
+      "AP_large": 0.7053163109591425,
+      "retained": 1.0011708122385032
+    },
+    {
+      "corruption": "downscale",
+      "severity": 4,
+      "description": "resolution loss / distant small objects",
+      "mAP50-95": 0.4005092028948225,
+      "mAP50": 0.6025962002781196,
+      "AP_small": 0.19957301195212684,
+      "AP_large": 0.6937944295542138,
+      "retained": 0.9688736918340493
+    },
+    {
+      "corruption": "fog",
+      "severity": 2,
+      "description": "depth-correct atmospheric scattering (Koschmieder)",
+      "mAP50-95": 0.21972726803356216,
+      "mAP50": 0.39740685683049504,
+      "AP_small": 0.13641247221677097,
+      "AP_large": 0.43404280119324323,
+      "retained": 0.5315432650175418
+    },
+    {
+      "corruption": "fog",
+      "severity": 4,
+      "description": "depth-correct atmospheric scattering (Koschmieder)",
+      "mAP50-95": 0.19601625248455876,
+      "mAP50": 0.35314384970837376,
+      "AP_small": 0.10837804812336906,
+      "AP_large": 0.43220260081829465,
+      "retained": 0.4741838360554802
+    },
+    {
+      "corruption": "glare",
+      "severity": 2,
+      "description": "low sun into the lens, veiling glare",
+      "mAP50-95": 0.40882325266008257,
+      "mAP50": 0.6208330625648023,
+      "AP_small": 0.22122791696690494,
+      "AP_large": 0.6956997765889433,
+      "retained": 0.9889862486290923
+    },
+    {
+      "corruption": "glare",
+      "severity": 4,
+      "description": "low sun into the lens, veiling glare",
+      "mAP50-95": 0.40892518461710337,
+      "mAP50": 0.6202412793349803,
+      "AP_small": 0.2204417149579893,
+      "AP_large": 0.6914523350286864,
+      "retained": 0.9892328327045662
+    },
+    {
+      "corruption": "jpeg",
+      "severity": 2,
+      "description": "compression artefacts",
+      "mAP50-95": 0.4091513844143491,
+      "mAP50": 0.6215905458985592,
+      "AP_small": 0.22845667743755496,
+      "AP_large": 0.7033528269903292,
+      "retained": 0.9897800336953688
+    },
+    {
+      "corruption": "jpeg",
+      "severity": 4,
+      "description": "compression artefacts",
+      "mAP50-95": 0.3954298050810281,
+      "mAP50": 0.6033490838238471,
+      "AP_small": 0.21283214511130827,
+      "AP_large": 0.6990042783275425,
+      "retained": 0.9565860967511539
+    },
+    {
+      "corruption": "low_light",
+      "severity": 2,
+      "description": "dusk / night, sensor pushing gain",
+      "mAP50-95": 0.40683485949912135,
+      "mAP50": 0.6209554798903503,
+      "AP_small": 0.21595320331118278,
+      "AP_large": 0.7010709271413272,
+      "retained": 0.9841761174042576
+    },
+    {
+      "corruption": "low_light",
+      "severity": 4,
+      "description": "dusk / night, sensor pushing gain",
+      "mAP50-95": 0.3277433550684375,
+      "mAP50": 0.5191061722833645,
+      "AP_small": 0.1588257848014981,
+      "AP_large": 0.6379065846532903,
+      "retained": 0.7928454879540539
+    },
+    {
+      "corruption": "motion_blur",
+      "severity": 2,
+      "description": "vehicle vibration, rolling shutter",
+      "mAP50-95": 0.3807877706955681,
+      "mAP50": 0.5898868234331651,
+      "AP_small": 0.18154325460426182,
+      "AP_large": 0.6728771878060347,
+      "retained": 0.9211654826717136
+    },
+    {
+      "corruption": "motion_blur",
+      "severity": 4,
+      "description": "vehicle vibration, rolling shutter",
+      "mAP50-95": 0.2580763550529235,
+      "mAP50": 0.4504287911224025,
+      "AP_small": 0.05547981053143446,
+      "AP_large": 0.6095146822303193,
+      "retained": 0.6243137213525268
+    },
+    {
+      "corruption": "rain",
+      "severity": 2,
+      "description": "drop streaks + wet-scene contrast loss",
+      "mAP50-95": 0.40903982583838444,
+      "mAP50": 0.6222924257332542,
+      "AP_small": 0.2268948251183656,
+      "AP_large": 0.6860832115816483,
+      "retained": 0.9895101618208415
+    },
+    {
+      "corruption": "rain",
+      "severity": 4,
+      "description": "drop streaks + wet-scene contrast loss",
+      "mAP50-95": 0.3879200840246459,
+      "mAP50": 0.601383515680887,
+      "AP_small": 0.20249519631117044,
+      "AP_large": 0.6548476085603453,
+      "retained": 0.938419295309511
+    },
+    {
+      "corruption": "sensor_noise",
+      "severity": 2,
+      "description": "high-ISO shot + read noise",
+      "mAP50-95": 0.4144154434396867,
+      "mAP50": 0.6295167038018815,
+      "AP_small": 0.22301326247955766,
+      "AP_large": 0.7031936148560103,
+      "retained": 1.002514343581503
+    },
+    {
+      "corruption": "sensor_noise",
+      "severity": 4,
+      "description": "high-ISO shot + read noise",
+      "mAP50-95": 0.4124674192998328,
+      "mAP50": 0.627239357406843,
+      "AP_small": 0.22337904593069727,
+      "AP_large": 0.7027248859034756,
+      "retained": 0.9978018692450323
+    }
+  ],
+  "robustness_score": 0.8857507135736802
+}

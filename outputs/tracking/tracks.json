@@ -1,0 +1,96 @@
+{
+  "clip": "denver_1d442d363b3f48f09c34a481a7d56310_000001",
+  "dt_s": 0.06,
+  "tracks": [
+    {
+      "track_id": 61,
+      "class": "cone",
+      "hits": 4,
+      "first_distance_m": 14.11,
+      "last_distance_m": 13.06,
+      "range_rate_mps": -3.149,
+      "ttc_s": 4.15
+    },
+    {
+      "track_id": 23,
+      "class": "cone",
+      "hits": 4,
+      "first_distance_m": 21.74,
+      "last_distance_m": 18.71,
+      "range_rate_mps": -2.504,
+      "ttc_s": 7.47
+    },
+    {
+      "track_id": 4,
+      "class": "cone",
+      "hits": 5,
+      "first_distance_m": 25.69,
+      "last_distance_m": 25.98,
+      "range_rate_mps": 0.603,
+      "ttc_s": null
+    },
+    {
+      "track_id": 8,
+      "class": "barrier",
+      "hits": 4,
+      "first_distance_m": 8.49,
+      "last_distance_m": 8.88,
+      "range_rate_mps": 0.536,
+      "ttc_s": null
+    },
+    {
+      "track_id": 24,
+      "class": "cone",
+      "hits": 6,
+      "first_distance_m": 22.08,
+      "last_distance_m": 17.14,
+      "range_rate_mps": 0.982,
+      "ttc_s": null
+    },
+    {
+      "track_id": 57,
+      "class": "cone",
+      "hits": 3,
+      "first_distance_m": 25.39,
+      "last_distance_m": 19.29,
+      "range_rate_mps": null,
+      "ttc_s": null
+    },
+    {
+      "track_id": 59,
+      "class": "cone",
+      "hits": 3,
+      "first_distance_m": 13.18,
+      "last_distance_m": 13.14,
+      "range_rate_mps": null,
+      "ttc_s": null
+    },
+    {
+      "track_id": 60,
+      "class": "cone",
+      "hits": 3,
+      "first_distance_m": 13.93,
+      "last_distance_m": 11.51,
+      "range_rate_mps": null,
+      "ttc_s": null
+    },
+    {
+      "track_id": 68,
+      "class": "cone",
+      "hits": 3,
+      "first_distance_m": 10.24,
+      "last_distance_m": 8.9,
+      "range_rate_mps": null,
+      "ttc_s": null
+    },
+    {
+      "track_id": 70,
+      "class": "cone",
+      "hits": 3,
+      "first_distance_m": 13.33,
+      "last_distance_m": 15.16,
+      "range_rate_mps": null,
+      "ttc_s": null
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+# ---------------------------------------------------------------------------
+# Training configuration.
+#
+# Transfer learning happens in two stages:
+#
+#   stage 1  COCO weights  ->  BDD100K (10 driving classes)
+#            Moves the backbone from web photos to forward-facing road imagery:
+#            motion blur, night, rain, small distant objects, horizon-centred
+#            layout.  The head learned here is thrown away.
+#
+#   stage 2  stage-1 weights -> cone / barrier / stop_sign
+#            The actual task.  Small dataset, so the schedule is short, the LR
+#            low and the augmentation conservative.
+#
+# `scripts/train.py --ablate` additionally trains stage 2 straight from COCO so
+# the contribution of stage 1 is measurable rather than assumed.
+# ---------------------------------------------------------------------------
+
+common:
+  imgsz: 640
+  seed: 0
+  workers: 3            # 13.7 GB host RAM: every ultralytics worker is a full
+                        # process importing torch + CUDA, and 8 of them exhaust
+                        # the Windows commit limit before GPU memory runs out
+  cache: false          # 6 k x 1280px images do not fit comfortably in 8 GB
+  val: true
+  plots: true
+  deterministic: true
+  # Driving-specific augmentation: the horizon is a strong prior, so never
+  # flip vertically and keep rotation/shear small - a cone does not appear at
+  # 30 degrees, and distorting the geometry also corrupts the size-distance cue
+  # the estimator depends on.
+  fliplr: 0.5
+  flipud: 0.0
+  degrees: 0.0
+  shear: 0.0
+  perspective: 0.0
+  scale: 0.45
+  translate: 0.1
+  hsv_h: 0.015
+  hsv_s: 0.6
+  hsv_v: 0.45          # generous: ROADWork is daylight-heavy, BDD100K is not
+  mosaic: 1.0
+  close_mosaic: 8      # last N epochs without mosaic, to match test-time layout
+  mixup: 0.10          # mild: a strong regulariser, but it blurs small objects
+  erasing: 0.35        # occlusion robustness - cones are constantly half-hidden
+  multi_scale: false   # tried and reverted: ultralytics pushes inputs to ~1088px,
+                       # which on an 8 GB card spills into WDDM shared memory and
+                       # costs ~10x throughput. Scale robustness is instead bought
+                       # by mosaic scale jitter (scale: 0.45) and the Downscale
+                       # augmentation, which are free.
+
+  # --- anti-overfitting ----------------------------------------------------
+  # The nav set is ~7k frames drawn from a few hundred video clips, so the
+  # effective sample size is far smaller than the frame count suggests. These
+  # settings assume that.
+  weight_decay: 0.0008   # above the 0.0005 default
+  label_smoothing: 0.02  # small: too much flattens the confidence the distance
+                         # gating relies on
+  dropout: 0.0
+  patience: 8            # stop early rather than memorise the clips
+  cos_lr: true           # smooth decay, no late-schedule spike that re-fits noise
+  fraction: 1.0
+
+  # --- hard-condition augmentation -----------------------------------------
+  # Preset consumed by src/train/augment.py. Pixel-level only: geometric warps
+  # would corrupt the apparent-size cue the distance estimator depends on.
+  hard_augment: hard
+
+stage1:
+  model: yolo11s.pt
+  data: data/processed/bdd_stage1/data.yaml
+  epochs: 20
+  batch: 16
+  lr0: 0.01
+  lrf: 0.01
+  optimizer: auto
+  warmup_epochs: 3.0
+  freeze: null
+  project: D:/ERIC Robotics/runs/stage1
+  name: bdd_yolo11s
+
+stage2:
+  model: null           # filled in from stage 1, or a COCO checkpoint for the ablation
+  data: data/processed/nav/data.yaml
+  epochs: 25
+  batch: 16
+  lr0: 0.003            # lower: we are refining a domain-adapted backbone
+  lrf: 0.01
+  optimizer: AdamW
+  warmup_epochs: 3.0
+  freeze: null
+  project: D:/ERIC Robotics/runs/stage2
+  name: nav_yolo11s
+
+# Nano domain-adaptation stage. A yolo11s checkpoint cannot initialise a yolo11n
+# model, so the edge backbone needs its own stage 1 -- otherwise the "with BDD100K
+# vs without" ablation would be confounded with a change of backbone.
+stage1_nano:
+  model: yolo11n.pt
+  data: data/processed/bdd_stage1/data.yaml
+  epochs: 12
+  batch: 32
+  lr0: 0.01
+  lrf: 0.01
+  optimizer: auto
+  warmup_epochs: 3.0
+  project: D:/ERIC Robotics/runs/stage1
+  name: bdd_yolo11n
+
+# Edge variant: same recipe, smaller backbone. Trained so the optimisation
+# section compares a genuinely lighter model, not just a compressed big one.
+stage2_nano:
+  model: null
+  data: data/processed/nav/data.yaml
+  epochs: 25
+  batch: 16
+  lr0: 0.003
+  lrf: 0.01
+  optimizer: AdamW
+  warmup_epochs: 3.0
+  project: D:/ERIC Robotics/runs/stage2
+  name: nav_yolo11n

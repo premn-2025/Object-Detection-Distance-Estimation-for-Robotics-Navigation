@@ -1,0 +1,66 @@
+{
+  "val_fraction_target": 0.25,
+  "per_source": {
+    "bdd": {
+      "groups": 251,
+      "val_groups": 62,
+      "images": 252,
+      "val_images": 63,
+      "val_fraction": 0.25
+    },
+    "coco": {
+      "groups": 1782,
+      "val_groups": 448,
+      "images": 1790,
+      "val_images": 448,
+      "val_fraction": 0.2503
+    },
+    "roadwork": {
+      "groups": 890,
+      "val_groups": 229,
+      "images": 5070,
+      "val_images": 1274,
+      "val_fraction": 0.2513
+    },
+    "roadwork_seq": {
+      "groups": 21,
+      "val_groups": 8,
+      "images": 2082,
+      "val_images": 696,
+      "val_fraction": 0.3343
+    }
+  },
+  "images_moved": 505,
+  "stale_removed": 0,
+  "embargoed_frames": 128,
+  "stats": {
+    "train": {
+      "images": 6713,
+      "negative_images": 179,
+      "boxes": {
+        "cone": 19972,
+        "barrier": 21174,
+        "stop_sign": 1979
+      },
+      "images_by_source": {
+        "bddstop": 189,
+        "coco": 1334,
+        "rw": 5190
+      }
+    },
+    "val": {
+      "images": 2481,
+      "negative_images": 82,
+      "boxes": {
+        "cone": 7310,
+        "barrier": 7181,
+        "stop_sign": 630
+      },
+      "images_by_source": {
+        "bddstop": 63,
+        "coco": 448,
+        "rw": 1970
+      }
+    }
+  }
+}

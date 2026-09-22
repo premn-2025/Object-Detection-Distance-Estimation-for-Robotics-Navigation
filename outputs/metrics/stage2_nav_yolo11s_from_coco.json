@@ -1,0 +1,8 @@
+{
+  "mAP50-95": 0.38972311443477786,
+  "mAP50": 0.592224861750056,
+  "precision": 0.7410748950525358,
+  "recall": 0.5532698680465052,
+  "fitness": 0.38972311443477786,
+  "save_dir": "D:\\ERIC Robotics\\runs\\stage2\\nav_yolo11s_from_coco"
+}

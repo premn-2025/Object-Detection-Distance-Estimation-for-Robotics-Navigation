@@ -1,0 +1,14 @@
+{
+  "weights": "runs/stage2/nav_yolo11s-3/weights/best.pt",
+  "classes": [
+    "cone",
+    "barrier",
+    "stop_sign"
+  ],
+  "steps": {
+    "benchmark": {
+      "json": "outputs\\benchmark\\benchmark.json",
+      "markdown": "outputs\\benchmark\\benchmark.md"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+# ---------------------------------------------------------------------------
+# Unified navigation-object taxonomy
+#
+# The assignment asks for cones / barriers / stop signs.  Those three classes do
+# not exist as such in any single public driving dataset, so the taxonomy below
+# is assembled from two annotated sources and documented explicitly:
+#
+#   * ROADWork (CMU, CC-BY 4.0) - dash-cam work-zone imagery, 1920x1080, COCO
+#     format.  Supplies cones and every flavour of temporary barrier.
+#   * COCO 2017 - supplies the `stop sign` category (ROADWork has none).
+#
+# BDD100K is used separately (see configs/bdd100k.yaml) for domain-adaptive
+# pre-training and for hard-negative mining, because its 10-class label set has
+# no cone/barrier categories and its `traffic sign` class does not distinguish
+# stop signs.
+# ---------------------------------------------------------------------------
+
+names:
+  0: cone
+  1: barrier
+  2: stop_sign
+
+# --- source -> unified mapping ------------------------------------------------
+# ROADWork COCO category name -> unified class name (unlisted = dropped)
+roadwork_map:
+  Cone: cone
+  Tubular Marker: cone        # slim delineator post, cone-like height (~0.7 m)
+  Barrier: barrier            # jersey / water-filled barrier
+  Barricade: barrier          # Type I/II/III barricade
+  Fence: barrier              # temporary construction fencing
+  Drum: barrier               # channelising drum (36 in)
+  Vertical Panel: barrier     # vertical delineator panel
+
+# COCO category name -> unified class name
+coco_map:
+  stop sign: stop_sign
+
+# --- classes deliberately excluded -------------------------------------------
+# Kept here so the decision is auditable rather than silent.
+roadwork_excluded:
+  - Work Vehicle           # vehicle, already covered by BDD100K pre-training
+  - Police Vehicle
+  - Worker                 # person
+  - Police Officer
+  - Work Equipment
+  - Arrow Board            # elevated, highly variable size -> poor height prior
+  - Temporary Traffic Control Message Board
+  - Bike Lane              # region annotation, not an obstacle
+  - Other Roadwork Objects # catch-all, no consistent geometry
+  # every "Temporary Traffic Control Sign*" variant: elevated signage whose
+  # physical size varies 0.6-1.5 m; not a navigation obstacle in the sense asked

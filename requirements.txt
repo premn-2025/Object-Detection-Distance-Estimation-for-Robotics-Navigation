@@ -1,0 +1,33 @@
+# Pinned where a version conflict actually bit during development.
+
+# --- core ---------------------------------------------------------------
+numpy==1.26.4            # 2.x breaks the prebuilt opencv/torch wheels used here
+opencv-python==4.11.0.86 # keep ONE opencv distribution installed; several
+                         # shadow each other in site-packages and the last
+                         # install silently wins
+PyYAML>=6.0
+tqdm>=4.65
+matplotlib>=3.7
+pandas>=2.0
+scipy>=1.11               # Nelder-Mead for the camera-pose fit
+Pillow>=10.0              # header-only image size reads during calibration
+
+# --- detection / transfer learning --------------------------------------
+torch>=2.1
+torchvision>=0.16
+ultralytics>=8.3          # AGPL-3.0 - check before any commercial use
+
+# --- augmentation and evaluation ----------------------------------------
+albumentations>=2.0       # hard-condition augmentation (src/train/augment.py)
+pycocotools>=2.0.7        # size-stratified AP for every backend
+
+# --- edge optimisation ---------------------------------------------------
+onnx>=1.15
+onnxruntime>=1.17         # CPU execution provider (FP32 / INT8)
+onnxslim>=0.1.31
+torch-pruning>=1.5        # structured pruning (see src/optimize/prune.py note)
+
+# --- dataset acquisition -------------------------------------------------
+requests>=2.31
+huggingface_hub>=0.23
+remotezip>=0.12           # inspect a remote zip without downloading it

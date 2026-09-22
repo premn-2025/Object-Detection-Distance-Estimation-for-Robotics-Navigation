@@ -1,0 +1,38 @@
+{
+  "dataset": "data\\processed\\nav",
+  "counts": {
+    "train": 6713,
+    "val": 2481
+  },
+  "identical_stems": {
+    "n": 0,
+    "examples": []
+  },
+  "shared_groups": {
+    "n_total": 0,
+    "n_roadwork_clips": 0,
+    "examples": [],
+    "train_clips": 3577,
+    "val_clips": 1437
+  },
+  "near_duplicates": {
+    "n": 0,
+    "checked_val": 2481,
+    "checked_train": 2481,
+    "threshold": 6,
+    "examples": []
+  },
+  "class_balance": {
+    "train": {
+      "stop_sign": 1979,
+      "cone": 19972,
+      "barrier": 21174
+    },
+    "val": {
+      "stop_sign": 630,
+      "cone": 7310,
+      "barrier": 7181
+    }
+  },
+  "verdict": "clean"
+}

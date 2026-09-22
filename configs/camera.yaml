@@ -1,0 +1,44 @@
+intrinsics:
+  image_width: 1920
+  image_height: 1080
+  hfov_deg: 60.0
+  fx: 1662.77
+  fy: 1662.77
+  cx: 960.0
+  cy: 540.0
+  source: auto_calibrated
+extrinsics:
+  camera_height_m: 1.3777
+  pitch_deg: -0.5337
+  camera_height_sigma_m: 0.15
+  pitch_sigma_deg: 1.5
+priors:
+  cone:
+    height_m: 0.75
+    height_sigma_m: 0.14
+    width_m: 0.36
+    width_sigma_m: 0.08
+    ground_contact: true
+    mount_height_m: 0.0
+  barrier:
+    height_m: 0.79
+    height_sigma_m: 0.2
+    width_m: null
+    width_sigma_m: null
+    ground_contact: true
+    mount_height_m: 0.0
+  stop_sign:
+    height_m: 0.79
+    height_sigma_m: 0.09
+    width_m: 0.79
+    width_sigma_m: 0.09
+    ground_contact: false
+    mount_height_m: 2.0
+    mount_height_sigma_m: 0.45
+estimator:
+  bbox_edge_sigma_px: 2.5
+  min_box_height_px: 8
+  max_range_m: 80.0
+  min_range_m: 0.3
+  truncation_margin_px: 4
+  fusion: inverse_variance
